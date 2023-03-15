@@ -11,8 +11,12 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"]
 function ToastPlayground() {
   // make controlled components | textarea✔ | radios
   const [message, setMessage] = React.useState("")
+  const [radioVariant, setRadioVariant] = React.useState("notice")
 
-  // add radio buttons
+  // my problem is RadioInput changes the state in 1 click, but updates
+  // in 2
+  // then when I type the RadioInput changes back to the original state
+  // of notice, instead of staying.
 
   return (
     <div className={styles.wrapper}>
@@ -41,7 +45,14 @@ function ToastPlayground() {
           <div className={styles.label}>Variant</div>
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             {VARIANT_OPTIONS.map((option) => {
-              return <RadioInput key={option} value={option} />
+              return (
+                <RadioInput
+                  key={option}
+                  option={option}
+                  radioVariant={radioVariant}
+                  setRadioVariant={setRadioVariant}
+                />
+              )
             })}
           </div>
         </div>
