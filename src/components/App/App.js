@@ -1,15 +1,18 @@
-import React from 'react';
+import React from "react"
 
-import ToastPlayground from '../ToastPlayground';
-import Footer from '../Footer';
+import ToastPlayground from "../ToastPlayground"
+import Footer from "../Footer"
+import ToastProvider from "../ToastProvider"
 
 function App() {
   return (
     <React.StrictMode>
-      <ToastPlayground />
-      <Footer />
+      <ToastProvider>
+        <ToastPlayground />
+        <Footer />
+      </ToastProvider>
     </React.StrictMode>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,26 +1,27 @@
-import React from 'react';
+import React from "react"
 import {
   AlertOctagon,
   AlertTriangle,
   CheckCircle,
   Info,
   X,
-} from 'react-feather';
+} from "react-feather"
 
-import VisuallyHidden from '../VisuallyHidden';
+import VisuallyHidden from "../VisuallyHidden"
 
-import styles from './Toast.module.css';
+import styles from "./Toast.module.css"
 
 const ICONS_BY_VARIANT = {
   notice: Info,
   warning: AlertTriangle,
   success: CheckCircle,
   error: AlertOctagon,
-};
+}
 
-function Toast({variant, dismissToast, children}) {
-  // const [isOpen, setIsOpen] = React.useState(false)
-  const IconTag = ICONS_BY_VARIANT[variant];
+function Toast({ variant, children, dismissToast, id }) {
+  const IconTag = ICONS_BY_VARIANT[variant]
+
+  // onClick of X, I want to remove the toast from the toast state
 
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
@@ -28,14 +29,17 @@ function Toast({variant, dismissToast, children}) {
         <IconTag size={24} />
       </div>
       <p className={styles.content}>
-        {children || '16 photos have been uploaded'}
+        {children}
+        <VisuallyHidden>{children}</VisuallyHidden>
       </p>
       <button className={styles.closeButton}>
-        <X size={24} onClick={dismissToast} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
+        <X size={24} onClick={() => dismissToast(id)} />
+        <VisuallyHidden aria-label="Dismiss message" aria-live="off">
+          Dismiss message
+        </VisuallyHidden>
       </button>
     </div>
-  );
+  )
 }
 
-export default Toast;
+export default Toast
